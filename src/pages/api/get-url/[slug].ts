@@ -6,8 +6,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const slug = req.query['slug'];
 
-  //console.log(query);
-
   if (!slug || typeof slug !== "string") {
     res.statusCode = 404;
 
@@ -28,6 +26,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (!data) {
     res.statusCode = 404;
 
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Cache-Control",
+      "s-max-age=100000000, stale-while-revalidate"
+    );
     res.send(JSON.stringify({message: "slug not found"}));
 
     return;
