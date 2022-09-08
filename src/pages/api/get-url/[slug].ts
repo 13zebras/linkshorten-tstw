@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.send(JSON.stringify({message: "please use a slug"}));
 
     return;
-  }
+  };
 
   const data = await prisma.shortLink.findFirst({
     where: {
@@ -34,6 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   }
 
+  // return res.redirect(data.url);
   return res.json(data);
 
 }
